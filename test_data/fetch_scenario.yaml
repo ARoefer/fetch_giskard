@@ -1,0 +1,134 @@
+controllerPath:
+  package: true
+  path: fetch_giskard/test_controllers/pos_controller.gpp
+name: Test Scenario
+poses:
+  Basic1:
+    positions:
+      upperarm_roll_joint: -1.413329615908279
+      wrist_flex_joint: -1.509688682874709
+      wrist_roll_joint: 3.636479350249048e-16
+      forearm_roll_joint: -1.106404147046963
+      elbow_flex_joint: -2.155466379029744
+      head_pan_joint: 0.2538912136166552
+      head_tilt_joint: 1.22637068297174
+      shoulder_lift_joint: 0.6234586818886207
+      shoulder_pan_joint: -1.198809265503651
+      torso_lift_joint: 0.3860999999999983
+    robotName: pr2
+    name: Basic1
+topic_jointStates: joint_states
+topic_jointCommands: /simulator/commands
+service_setJointState: /simulator/set_joint_states
+simulationSettings:
+  timeStep: 0.025
+  useTimeStep: false
+  isRunning: false
+  defaultPose: Basic1
+sceneObjects:
+  table:
+    name: table
+    parent: odom_combined
+    transform:
+      position:
+        x: 0.5999740362167358
+        y: 3.123283386230469e-05
+        z: 0.6298614740371704
+      rotation:
+        x: -0.001633163457451746
+        y: 0.004657179209343697
+        z: 3.972984710729772e-05
+        w: 0.9999878208660706
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 1
+      action: 0
+      pose:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 0.6
+        y: 0.6
+        z: 0.004
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+  goal:
+    name: goal
+    parent: base_link
+    transform:
+      position:
+        x: 0.3633113503456116
+        y: 0.0833984762430191
+        z: 0.8991255164146423
+      rotation:
+        x: 0.006072604168850281
+        y: 0.04851208311753553
+        z: 0.1240589633274344
+        w: 0.9910696619755486
+    visual:
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+      scale:
+        x: 0.1
+        y: 0.1
+        z: 0.1
+      color:
+        a: 1
+        r: 1
+        g: 0
+        b: 0
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 2
+      action: 0
+      pose:
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+        position:
+          z: 0
+          x: 0
+          y: 0
+inputAssignments:
+  plane:
+    object: table
+    target: base_link
+    type: frameQuery
+    name: plane
+  goal_bla:
+    target: base_link
+    name: goal_bla
+    type: frameQuery
+    object: goal
+urdfPath:
+  path: giskard_sim/robots/pr2.urdf
+  package: true

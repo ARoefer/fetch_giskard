@@ -1,0 +1,41 @@
+simulated_joints:
+  - head_pan_joint
+  - head_tilt_joint
+  - torso_lift_joint
+  - elbow_flex_joint
+  - forearm_roll_joint
+  - shoulder_pan_joint
+  - shoulder_lift_joint 
+  - upperarm_roll_joint
+  - wrist_flex_joint
+  - wrist_roll_joint
+  - r_gripper_finger_joint
+  - l_gripper_finger_joint
+  - bellows_joint
+start_config:
+  torso_lift_joint: 0.3
+  head_pan_joint: 0.0
+  head_tilt_joint: 0.0
+  upperarm_roll_joint: -0.0
+  shoulder_pan_joint: -0.0
+  shoulder_lift_joint: 0.0
+  forearm_roll_joint: 0
+  elbow_flex_joint: -0
+  wrist_flex_joint: -0
+  wrist_roll_joint: 0
+  r_gripper_finger_joint: 0.05
+  l_gripper_finger_joint: 0.05
+controlled_joints:
+  - head_pan_joint
+  - head_tilt_joint
+  - torso_lift_joint
+  - elbow_flex_joint
+  - forearm_roll_joint
+  - shoulder_pan_joint
+  - shoulder_lift_joint 
+  - upperarm_roll_joint
+  - wrist_flex_joint
+  - wrist_roll_joint
+projection_mode: false
+sim_frequency: 60
+watchdog_period: 0.1

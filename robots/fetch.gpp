@@ -1,0 +1,62 @@
+import "package://giskard_suturo_parser/gpplib/math.gpp";
+
+torso_lift_joint = inputJoint("torso_lift_joint");
+
+head_pan_joint  = inputJoint("head_pan_joint");
+head_tilt_joint = inputJoint("head_tilt_joint");
+
+shoulder_pan_joint  = inputJoint("shoulder_pan_joint");
+shoulder_lift_joint = inputJoint("shoulder_lift_joint");
+upperarm_roll_joint = inputJoint("upperarm_roll_joint");
+elbow_flex_joint    = inputJoint("elbow_flex_joint");
+forearm_roll_joint  = inputJoint("forearm_roll_joint");
+wrist_flex_joint    = inputJoint("wrist_flex_joint");
+wrist_roll_joint    = inputJoint("wrist_roll_joint");
+
+torso_lift_frame = frame(rotation(unitX, 0), vec3(-0.08687499, 0, 0.37743 + torso_lift_joint));
+
+head_pan_frame    = frame(rotation(vec3(0, 0, 1), head_pan_joint), vec3(0.053125, 0, 0.603001417713939));
+head_tilt_frame   = frame(rotation(vec3(0, 1, 0), head_tilt_joint), vec3(0.14253, 0, 0.057999));
+head_camera_frame = frame(rotation(vec3(1, 0, 0), 0), vec3(0.055, 0, 0.0225));
+
+shoulder_pan_frame  = frame(rotation(unitZ, shoulder_pan_joint), vec3(0.119525, 0, 0.34858));
+shoulder_lift_frame = frame(rotation(unitY, shoulder_lift_joint), vec3(0.117, 0, 0.0599999));
+upperarm_roll_frame = frame(rotation(unitX, upperarm_roll_joint), vec3(0.219, 0, 0));
+elbow_flex_frame    = frame(rotation(unitY, elbow_flex_joint), vec3(0.133, 0, 0));
+forearm_roll_frame  = frame(rotation(unitX, forearm_roll_joint), vec3(0.197, 0, 0));
+wrist_flex_frame    = frame(rotation(unitY, wrist_flex_joint), vec3(0.1245, 0, 0));
+wrist_roll_frame    = frame(rotation(unitX, wrist_roll_joint), vec3(0.1385, 0, 0));
+gripper_frame       = frame(rotation(unitX, 0), vec3(0.16645, 0, 0));
+
+camera = torso_lift_frame * head_pan_frame * head_tilt_frame * head_camera_frame;
+
+elbow   = torso_lift_frame * shoulder_pan_frame * shoulder_lift_frame * upperarm_roll_frame * elbow_flex_frame;
+gripper = elbow * forearm_roll_frame * wrist_flex_frame * wrist_roll_frame * gripper_frame;
+
+arm_weight = 0.001;
+head_weight = 0.001;
+
+torso_controllables = [controllableC(  -0.1,   0.1,       0.01, "torso_lift_joint")];
+
+head_controllables = [controllableC(-1.57, 1.57, head_weight, "head_pan_joint"),
+	controllableC(-1.57, 1.57, head_weight, "head_tilt_joint")];
+
+
+arm_controllables = [controllableC(-1.256, 1.256, arm_weight, "shoulder_pan_joint"),
+	controllableC(-1.454, 1.454, arm_weight, "shoulder_lift_joint"),
+	controllableC(-1.571, 1.571, arm_weight, "upperarm_roll_joint"),
+	controllableC(-1.521, 1.521, arm_weight, "elbow_flex_joint"),
+	controllableC(-1.571, 1.571, arm_weight, "forearm_roll_joint"),
+	controllableC(-2.268, 2.268, arm_weight, "wrist_flex_joint"),
+	controllableC(-2.268, 2.268, arm_weight, "wrist_roll_joint")];
+
+
+hardConstraints = [hardC(-torso_lift_joint, 0.3861 - torso_lift_joint, torso_lift_joint),
+	hardC(-1.6056 - shoulder_pan_joint, 1.6056 - shoulder_pan_joint, shoulder_pan_joint),
+	hardC(-1.221 - shoulder_lift_joint, 1.518 - shoulder_lift_joint, shoulder_lift_joint),
+	hardC(-2.251 - elbow_flex_joint   , 2.251 - elbow_flex_joint   , elbow_flex_joint),
+	hardC(-2.16 - wrist_flex_joint    , 2.16 - wrist_flex_joint    , wrist_flex_joint),
+	hardC(-1.57 - head_pan_joint      , 1.57 - head_pan_joint      , head_pan_joint),
+	hardC(-0.76 - head_tilt_joint     , 1.45 - head_tilt_joint     , head_tilt_joint)];
+
+
