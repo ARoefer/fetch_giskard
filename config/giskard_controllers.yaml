@@ -1,0 +1,37 @@
+velocity_controller:
+  joint_velocity_controller:
+    type: "robot_controllers/VelocityController"
+    joints:
+      - torso_lift_joint
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - upperarm_roll_joint
+      - elbow_flex_joint
+      - forearm_roll_joint
+      - wrist_flex_joint
+      - wrist_roll_joint
+      - head_pan_joint
+      - head_tilt_joint
+  gravity_compensation:
+    type: "robot_controllers/GravityCompensation"
+    root: "torso_lift_link"
+    tip: "gripper_link"
+    autostart: true
+
+base_controller:
+  type: "robot_controllers/DiffDriveBaseController"
+  max_velocity_x: 1.0
+  max_acceleration_x: 0.75
+  # hold position
+  moving_threshold: -0.01
+  rotating_threshold: -0.01
+  # autostart to get odom
+  autostart: true
+  # use laser to only slowly collide with things
+  laser_safety_dist: 1.0
+
+robot_driver:
+  default_controllers:
+    - "velocity_controller/joint_velocity_controller"
+    - "velocity_controller/gravity_compensation"
+    - "base_controller"
