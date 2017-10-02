@@ -1,0 +1,8 @@
+<library path="librobot_controllers">
+
+  <class name="robot_controllers/VelocityController"
+         type="robot_controllers::VelocityController"
+         base_class_type="robot_controllers::Controller">
+    <description>A controller allowing users to control joints using velocities.</description>
+  </class>
+</library>

@@ -17,9 +17,30 @@ int VelocityController::init(ros::NodeHandle& nh, ControllerManager* manager) {
   std::string paramCJ;
   nh.getParam("controlled_joints", paramCJ);
   std::stringstream jointStream(paramCJ);
-  while (!jointStream.eof()) {
-    std::string jname;
-    jointStream >> jname;
+
+  XmlRpc::XmlRpcValue names;
+  if (!nh.getParam("joints", names))
+  {
+    ROS_ERROR_STREAM("No joints given for " << nh.getNamespace());
+    return -1;
+  }
+
+  if (names.getType() != XmlRpc::XmlRpcValue::TypeArray)
+  {
+    ROS_ERROR_STREAM("Joints not in a list for " << nh.getNamespace());
+    return -1;
+  }
+
+  for (int i = 0; i < names.size(); ++i)
+  {
+    XmlRpc::XmlRpcValue &name_value = names[i];
+    if (name_value.getType() != XmlRpc::XmlRpcValue::TypeString)
+    {
+      ROS_ERROR_STREAM("Not all joint names are strings for " << nh.getNamespace());
+      return -1;
+    }
+
+    std::string jname = static_cast<std::string>(name_value);
     JointHandlePtr joint = manager->getJointHandle(jname);
     if (!joint) {
       ROS_ERROR_NAMED("JointVelocityController", "Can't get handle for joint '%s' from manager.", jname.c_str());
