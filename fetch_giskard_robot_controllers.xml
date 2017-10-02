@@ -1,4 +1,4 @@
-<library path="librobot_controllers">
+<library path="lib/libfetch_giskard_robot_controllers">
 
   <class name="robot_controllers/VelocityController"
          type="robot_controllers::VelocityController"
