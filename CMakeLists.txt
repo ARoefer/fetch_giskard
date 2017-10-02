@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   robot_controllers_interface
   sensor_msgs
+  pluginlib
 )
 
 
@@ -80,7 +81,7 @@ target_link_libraries(${PROJECT_NAME}_controllers
 
 install(DIRECTORY include/ DESTINATION include)
 
-install(FILES robot_controllers.xml
+install(FILES fetch_giskard_robot_controllers.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
