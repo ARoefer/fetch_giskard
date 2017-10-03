@@ -47,7 +47,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
    INCLUDE_DIRS include
 #  LIBRARIES fetch_giskard
-#  CATKIN_DEPENDS giskard_core roscpp
+  CATKIN_DEPENDS roscpp pluginlib
 #  DEPENDS system_lib
 )
 
@@ -79,7 +79,7 @@ target_link_libraries(${PROJECT_NAME}_controllers
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-install(TARGETS 
+install(TARGETS
   ${PROJECT_NAME}_controllers
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

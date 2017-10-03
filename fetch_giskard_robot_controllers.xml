@@ -1,6 +1,6 @@
-<library path="lib/libfetch_giskard_robot_controllers">
+<library path="lib/libfetch_giskard_controllers">
 
-  <class name="robot_controllers/VelocityController"
+  <class
          type="robot_controllers::VelocityController"
          base_class_type="robot_controllers::Controller">
     <description>A controller allowing users to control joints using velocities.</description>
