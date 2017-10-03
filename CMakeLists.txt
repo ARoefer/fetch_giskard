@@ -79,15 +79,15 @@ target_link_libraries(${PROJECT_NAME}_controllers
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-install(DIRECTORY include/ DESTINATION include)
-
-install(FILES fetch_giskard_robot_controllers.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
-install(
-  TARGETS ${PROJECT_NAME}_controllers
+install(TARGETS 
+  ${PROJECT_NAME}_controllers
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  fetch_giskard_robot_controllers.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
