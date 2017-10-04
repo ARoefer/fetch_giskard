@@ -12,10 +12,6 @@ velocity_controller:
       - wrist_roll_joint
       - head_pan_joint
       - head_tilt_joint
-  gravity_compensation:
-    type: "robot_controllers/GravityCompensation"
-    root: "torso_lift_link"
-    tip: "gripper_link"
     autostart: true
 
 base_controller:
@@ -33,5 +29,4 @@ base_controller:
 robot_driver:
   default_controllers:
     - "velocity_controller/joint_velocity_controller"
-    - "velocity_controller/gravity_compensation"
     - "base_controller"

@@ -12,17 +12,13 @@
 namespace robot_controllers {
 
 /**
- * @brief Base class for a controller. Is derived from a Handle, so that
- *        controllers can be passed from ControllerManager::getHandle(),
- *        thus allowing controllers to access other controllers (to stack
- *        their commands.
+ * @brief Controller class to control robot using joint velocity goals.
  */
 class VelocityController : public Controller {
   struct ControlledJoint {
     JointHandlePtr joint;
     ros::Time lastCommandStamp;
     double desiredVelocity;
-    double desiredEffort;
   };
 
 public:
@@ -30,7 +26,9 @@ public:
    * @brief Default constructor, does almost nothing, all setup is done in init().
    */
   VelocityController()
-  : watchdogPeriod(0.05) { }
+  : watchdogPeriod(0.05) {
+    ROS_INFO("Velocity controller created");
+  }
 
   /**
    * @brief Initialize the controller by reading the names of the controlled joints from the parameter server.
