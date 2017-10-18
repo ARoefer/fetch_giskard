@@ -44,7 +44,7 @@ class FetchEEFPositionControl(object):
             cmdMsg = cmdDictToJointState(command)
             self.publisher.publish(cmdMsg)
         except (tf.LookupException, tf.ConnectivityException) as e:
-            print('Lookup of goal frame "' + self.goal_frame + '" in "base_link" failed. Skipping update. Exception: ' + e.message)
+            print('Lookup of goal frame "' + self.goal_frame + '" in "base_link" failed. Skipping update. Exception: ', e)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

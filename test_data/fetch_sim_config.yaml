@@ -5,7 +5,7 @@ simulated_joints:
   - elbow_flex_joint
   - forearm_roll_joint
   - shoulder_pan_joint
-  - shoulder_lift_joint 
+  - shoulder_lift_joint
   - upperarm_roll_joint
   - wrist_flex_joint
   - wrist_roll_joint
@@ -32,7 +32,7 @@ controlled_joints:
   - elbow_flex_joint
   - forearm_roll_joint
   - shoulder_pan_joint
-  - shoulder_lift_joint 
+  - shoulder_lift_joint
   - upperarm_roll_joint
   - wrist_flex_joint
   - wrist_roll_joint
