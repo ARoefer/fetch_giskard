@@ -12,6 +12,7 @@ class Fetch(Robot):
 
         self.gripper = self.frames['gripper_link']
         self.eef     = self.gripper
+        self.camera  = self.frames['head_camera_link']
         self.joint_state = {}
 
     def set_joint_state(self, joint_state):
