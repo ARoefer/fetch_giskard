@@ -13,16 +13,11 @@ class Fetch(Robot):
         self.gripper = self.frames['gripper_link']
         self.eef     = self.gripper
         self.camera  = self.frames['head_camera_link']
-        self.joint_state = {}
 
     def set_joint_state(self, joint_state):
         for i, joint_name in enumerate(joint_state.name):
-            if joint_name in self.joints:
-                self.joint_state[joint_name] = joint_state.position[i]
-
-
-    def update_observables(self):
-        return self.joint_state
+            if joint_name in self._state:
+                self._state[joint_name] = joint_state.position[i]
 
     def __str__(self):
         return 'Fetch\'s state:\n' + reduce(operator.add, map(lambda t: t[0] + ': {:.3f}\n'.format(t[1]), self.joint_state.iteritems()), '')
