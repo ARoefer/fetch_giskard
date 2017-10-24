@@ -40,7 +40,7 @@ class FetchEEFPositionControl(object):
             #self.tfListener.waitForTransform("base_link", self.goal_frame, now, rospy.Duration(0.5))
             (trans, rot) = self.tfListener.lookupTransform('base_link', self.goal_frame, rospy.Time(0))
             self.controller.set_goal(trans)
-            command = self.controller.update_observables()
+            command = self.controller.get_next_command()
             cmdMsg = cmdDictToJointState(command)
             self.publisher.publish(cmdMsg)
         except (tf.LookupException, tf.ConnectivityException) as e:

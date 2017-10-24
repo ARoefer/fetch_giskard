@@ -1,5 +1,9 @@
 from giskardpy.robot import Robot
 import operator
+from collections import namedtuple
+
+
+Gripper = namedtuple('Gripper', ['frame', 'opening', 'height'])
 
 class Fetch(Robot):
     def __init__(self, urdf='fetch.urdf'):
@@ -10,8 +14,8 @@ class Fetch(Robot):
 
         self.set_joint_weight('torso_lift_joint', 0.05)
 
-        self.gripper = self.frames['gripper_link']
-        self.eef     = self.gripper
+        self.gripper = Gripper(frame=self.frames['gripper_link'], opening=0.1, height=0.03)
+        self.eef     = self.gripper.frame
         self.camera  = self.frames['head_camera_link']
 
     def set_joint_state(self, joint_state):
