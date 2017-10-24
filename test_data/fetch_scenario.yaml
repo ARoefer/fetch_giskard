@@ -1,129 +1,175 @@
+controllerPath:
+  package: true
+  path: fetch_giskard/test_controllers/pos_controller.gpp
 urdfPath:
   package: true
   path: fetch_description/robots/fetch.urdf
 inputAssignments:
   goal_bla:
-    target: base_link
     object: goal
     name: goal_bla
     type: frameQuery
+    target: base_link
+name: Test Scenario
+poses:
+  Basic1:
+    positions:
+      head_tilt_joint: 1.22637068297174
+      shoulder_lift_joint: 0.6234586818886207
+      shoulder_pan_joint: -1.198809265503651
+      torso_lift_joint: 0.3860999999999983
+      head_pan_joint: 0.2538912136166552
+      forearm_roll_joint: -1.106404147046963
+      upperarm_roll_joint: -1.413329615908279
+      wrist_flex_joint: -1.509688682874709
+      wrist_roll_joint: 3.636479350249048e-16
+      elbow_flex_joint: -2.155466379029744
+    name: Basic1
+    robotName: fetch
 sceneObjects:
   goal:
-    name: goal
-    parent: base_link
-    transform:
-      position:
-        x: 1.282502770423889
-        y: 0.1533718109130859
-        z: 0.5513184070587158
-      rotation:
-        x: -0.02576655283361828
-        y: -0.2058412241828139
-        z: 0.1215055038674666
-        w: 0.9706708441649547
     visual:
-      header:
-        frame_id: ""
-      ns: ""
       id: 0
       type: 2
       action: 0
       pose:
+        orientation:
+          x: 0
+          z: 0
+          y: 0
+          w: 1
         position:
           x: 0
           y: 0
           z: 0
-        orientation:
-          x: 0
-          y: 0
-          z: 0
-          w: 1
-      scale:
-        x: 0.1
-        y: 0.1
-        z: 0.1
+      header:
+        frame_id: ""
+      ns: ""
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
       color:
         r: 1
         g: 0
         b: 0
         a: 1
-      points:
-        []
-      colors:
-        []
-      text: ""
-      mesh_resource: ""
-      mesh_use_embedded_materials: true
-  table:
-    name: table
+      scale:
+        x: 0.1
+        y: 0.1
+        z: 0.1
+    name: goal
     parent: base_link
     transform:
       position:
-        x: 0.9683435559272766
-        y: 0.6173102259635925
-        z: 0.52946937084198
+        x: 0.8762345314025879
+        y: -0.2643685936927795
+        z: 0.7590609192848206
       rotation:
-        x: -0.001633163457451746
-        y: 0.004657179209343697
-        z: 3.972984710729772e-05
-        w: 0.9999878208660706
+        x: -0.02576655283361828
+        y: -0.2058412241828139
+        z: 0.1215055038674666
+        w: 0.9706708441649547
+  cylinder:
     visual:
-      color:
-        r: 1
-        g: 1
-        b: 1
-        a: 1
-      points:
-        []
-      colors:
-        []
-      text: ""
-      mesh_resource: ""
-      mesh_use_embedded_materials: true
       header:
         frame_id: ""
       ns: ""
       id: 0
-      type: 1
+      type: 3
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      color:
+        r: 0.05882353
+        b: 1
+        g: 0.4352941
+        a: 1
+      scale:
+        x: 0.06000000000000001
+        y: 0.06000000000000001
+        z: 0.14
       action: 0
       pose:
-        position:
-          x: 0
-          y: 0
-          z: 0
         orientation:
           x: 0
           y: 0
           z: 0
           w: 1
+        position:
+          y: 0
+          z: 0
+          x: 0
+      mesh_use_embedded_materials: true
+    transform:
+      rotation:
+        w: 1
+        x: 0
+        y: 0
+        z: 0
+      position:
+        z: 0.7150127291679382
+        x: 0.8745408058166504
+        y: 0.2683033347129822
+    name: cylinder
+    parent: base_link
+  table:
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 1
+      color:
+        r: 1
+        g: 1
+        a: 1
+        b: 1
       scale:
-        x: 0.6
         z: 0.004
+        x: 0.6
         y: 0.6
-name: Test Scenario
+      action: 0
+      pose:
+        orientation:
+          w: 1
+          x: 0
+          z: 0
+          y: 0
+        position:
+          y: 0
+          z: 0
+          x: 0
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+    parent: base_link
+    transform:
+      rotation:
+        x: -0.001633163457451746
+        y: 0.004657179209343697
+        w: 0.9999878208660706
+        z: 3.972984710729772e-05
+      position:
+        z: 0.4958750009536743
+        x: 1.014273643493652
+        y: 0.7738974094390869
+    name: table
 topic_jointStates: joint_states
 topic_jointCommands: /velocity_controller/joint_velocity_controller/joint_velocity_commands
 service_setJointState: /simulator/set_joint_states
 simulationSettings:
-  timeStep: 0.025
-  useTimeStep: false
   isRunning: false
   defaultPose: Basic1
-controllerPath:
-  path: fetch_giskard/test_controllers/pos_controller.gpp
-  package: true
-poses:
-  Basic1:
-    positions:
-      elbow_flex_joint: -2.155466379029744
-      head_pan_joint: 0.2538912136166552
-      head_tilt_joint: 1.22637068297174
-      shoulder_lift_joint: 0.6234586818886207
-      shoulder_pan_joint: -1.198809265503651
-      torso_lift_joint: 0.3860999999999983
-      upperarm_roll_joint: -1.413329615908279
-      wrist_flex_joint: -1.509688682874709
-      wrist_roll_joint: 3.636479350249048e-16
-      forearm_roll_joint: -1.106404147046963
-    name: Basic1
-    robotName: fetch
+  timeStep: 0.025
+  useTimeStep: false
