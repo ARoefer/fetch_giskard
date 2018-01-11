@@ -426,6 +426,14 @@
     <child link="r_gripper_finger_link" />
     <axis xyz="0 1 0" />
   <limit effort="60" lower="0.0" upper="0.05" velocity="0.05" /><dynamics damping="100.0" /></joint>
+  <joint name="gripper_joint" type="prismatic">
+      <parent link="gripper_link" />
+      <child link="fake_gripper_link"/>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="60" lower="0.0" upper="0.1" velocity="0.1" /><dynamics damping="100.0" />
+    </joint>
+  <link name="fake_gripper_link"/>
   <link name="l_gripper_finger_link">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.01 0 0" />

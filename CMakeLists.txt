@@ -73,16 +73,16 @@ add_library(${PROJECT_NAME}_controllers
   src/velocity_controller.cpp
 )
 
-add_executable(gnp_opt_test src/opt_test.cpp)
+# add_executable(gnp_opt_test src/opt_test.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_controllers
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(gnp_opt_test
-  ${catkin_LIBRARIES}
-)
+# target_link_libraries(gnp_opt_test
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##

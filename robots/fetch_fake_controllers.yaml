@@ -1,4 +1,6 @@
 - r_gripper_finger_joint:
     position: {add: [{mul: [{f-pos-of: gripper_joint}, {pos-lim-len-of: r_gripper_finger_joint}]}, {pos-lim-low-of: r_gripper_finger_joint}]}
+    velocity: {mul: [0.5, {f-vel-of: gripper_joint}]}
 - l_gripper_finger_joint:
     position: {add: [{mul: [{f-pos-of: gripper_joint}, {pos-lim-len-of: l_gripper_finger_joint}]}, {pos-lim-low-of: l_gripper_finger_joint}]}
+    velocity: {mul: [0.5, {f-vel-of: gripper_joint}]}
