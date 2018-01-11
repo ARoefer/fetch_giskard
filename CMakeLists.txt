@@ -14,6 +14,9 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   pluginlib
   giskardpy
+  giskard_core
+  giskard_suturo_parser
+  resource_retriever
 )
 
 catkin_python_setup()
@@ -70,8 +73,14 @@ add_library(${PROJECT_NAME}_controllers
   src/velocity_controller.cpp
 )
 
+add_executable(gnp_opt_test src/opt_test.cpp)
+
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_controllers
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(gnp_opt_test
   ${catkin_LIBRARIES}
 )
 
