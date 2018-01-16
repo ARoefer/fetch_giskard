@@ -3,5 +3,9 @@
 
 <node name="robot_driver" pkg="fetch_drivers" type="robot_driver" output="screen"/>
 
+<node name="gripper_driver" pkg="fetch_drivers" type="gripper_driver" output="screen" >
+    <param name="firmware_tar_gz" value="$(find fetch_drivers)/firmware.tar.gz" />
+  </node>
+
 
 </launch>
