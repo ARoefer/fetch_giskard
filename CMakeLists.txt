@@ -71,6 +71,7 @@ include_directories(
 ## Declare a C++ library
 add_library(${PROJECT_NAME}_controllers
   src/velocity_controller.cpp
+  src/position_controller.cpp
 )
 
 # add_executable(gnp_opt_test src/opt_test.cpp)

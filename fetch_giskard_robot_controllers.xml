@@ -5,4 +5,9 @@
          base_class_type="robot_controllers::Controller">
     <description>A controller allowing users to control joints using velocities.</description>
   </class>
+  <class name="robot_controllers/PositionController"
+         type="robot_controllers::PositionController"
+         base_class_type="robot_controllers::Controller">
+    <description>A controller allowing users to control joints using positions.</description>
+  </class>
 </library>
