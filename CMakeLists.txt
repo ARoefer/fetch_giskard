@@ -14,9 +14,9 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   pluginlib
   giskardpy
-  giskard_core
-  giskard_suturo_parser
-  resource_retriever
+  # giskard_core
+  # giskard_suturo_parser
+  # resource_retriever
 )
 
 catkin_python_setup()
