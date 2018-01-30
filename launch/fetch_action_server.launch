@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="suturo_action_server" type="suturo_action_server" name="movement_server" output="screen">
+		<param name="config" textfile="$(find fetch_giskard)/config/fetch_action_server_config.yaml"/>
+	</node>
+</launch>
