@@ -1,0 +1,4 @@
+- name: goal_bla
+  type: transform
+  const: false
+  value: goal base_link

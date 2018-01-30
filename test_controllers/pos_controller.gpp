@@ -2,10 +2,15 @@ import "package://giskard_suturo_parser/gpplib/basic_goals.gpp";
 import "package://fetch_giskard/robots/fetch.gpp" as robot;
 
 goal = inputFrame("goal_bla");
-plane = inputFrame("plane");
 
-QPController(robot.arm_controllables + robot.torso_controllables + robot.head_controllables, 
-	ballGrasp(robot.gripper, goal.pos, 0.05, 1) 
-	+ lookAt(robot.camera, goal.pos, 1)
-	+ avoidSupportingPlane(robot.gripper, plane, 0.05, 10), 
+feedback = 1; #norm(robot.gripper.pos - goal.pos);
+
+VIS__eef = robot.gripper.pos;
+VIS__camera = robot.camera;
+VIS__goal = goal.pos;
+#
+QPController( robot.arm_controllables + robot.torso_controllables + robot.head_controllables + robot.gripper_controllables,
+	positionAlignment(robot.gripper.pos, goal.pos, 1)
+	+ lookAt(robot.camera, goal.pos, 1),
+	#+ avoidSupportingPlane(robot.gripper, plane, 0.05, 10),
 	robot.hardConstraints);

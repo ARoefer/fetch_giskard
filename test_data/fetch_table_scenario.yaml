@@ -1,0 +1,268 @@
+sceneObjects:
+  coke:
+    name: coke
+    parent: base_link
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      text: ""
+      mesh_resource: package://4progress_object_models//dae_obj_files/coke.dae
+      mesh_use_embedded_materials: true
+      type: 10
+      action: 0
+      pose:
+        position:
+          x: 0
+          z: 0
+          y: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      color:
+        r: 0.8392157
+        g: 0.1254902
+        b: 0
+        a: 1
+      points:
+        []
+      colors:
+        []
+    transform:
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+      position:
+        x: 0.7537055611610413
+        y: -0.2473929524421692
+        z: 0.8760733008384705
+  pringles:
+    name: pringles
+    parent: base_link
+    transform:
+      position:
+        x: 0.8865542411804199
+        y: -0.1418645679950714
+        z: 0.932830810546875
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 3
+      action: 0
+      pose:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 0.065
+        y: 0.065
+        z: 0.25
+      color:
+        r: 0.1254902
+        g: 0.6901961
+        b: 0.2588235
+        a: 1
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+  table:
+    name: table
+    parent: base_link
+    transform:
+      position:
+        x: 0.8754167556762695
+        y: -0.114052452147007
+        z: 0.7905427813529968
+      rotation:
+        x: -0.0001784342599033558
+        y: 0.005515366298710849
+        z: -0.03233082848862618
+        w: 0.999461988484327
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 1
+      action: 0
+      pose:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 0.58
+        y: 1.17
+        z: 0.03
+      color:
+        r: 0.8862745
+        g: 0.7294118
+        b: 0.4156863
+        a: 1
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+  sugar:
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 3
+      action: 0
+      pose:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 0.07000000000000001
+        y: 0.07000000000000001
+        z: 0.2
+      color:
+        r: 0.972549
+        g: 0.8588235
+        b: 0.1921569
+        a: 1
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+    name: sugar
+    parent: base_link
+    transform:
+      position:
+        x: 0.6826986074447632
+        y: -0.112997755408287
+        z: 0.8544877767562866
+      rotation:
+        z: 0.1302720307559716
+        w: 0.6801571142159687
+        x: 0.7085195179706881
+        y: 0.1357040553509904
+  poi:
+    visual:
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+      scale:
+        x: 0.05
+        y: 0.05
+        z: 0.05
+      color:
+        b: 1
+        a: 1
+        r: 1
+        g: 1
+      header:
+        frame_id: ""
+      type: 2
+      ns: ""
+      id: 0
+      action: 0
+      pose:
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+        position:
+          z: 0
+          x: 0
+          y: 0
+    name: poi
+    parent: base_link
+    transform:
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+      position:
+        x: 0.9283498525619507
+        y: -0.06571906805038452
+        z: 1.17665958404541
+controllerPath:
+  path: fetch_giskard/test_controllers/pos_controller.gpp
+  package: true
+poses:
+  Basic:
+    positions:
+      elbow_flex_joint: -2.155466379029744
+      shoulder_lift_joint: 0.6234586818886207
+      shoulder_pan_joint: -1.198809265503651
+      torso_lift_joint: 0.3860999999999983
+      gripper_joint: 0
+      head_tilt_joint: 1.22637068297174
+      head_pan_joint: 0.2538912136166552
+      upperarm_roll_joint: -1.413329615908279
+      wrist_flex_joint: -1.509688682874709
+      wrist_roll_joint: 3.636479350249048e-16
+      forearm_roll_joint: -1.106404147046963
+    robotName: fetch
+    name: Basic
+inputAssignments:
+  goal_bla:
+    target: base_link
+    name: goal_bla
+    type: frameQuery
+    object: poi
+urdfPath:
+  package: true
+  path: fetch_description/robots/fetch.urdf
+name: Test Scenario
+topic_jointCommands: /velocity_controller/joint_velocity_controller/joint_velocity_commands
+service_setJointState: /simulator/set_joint_states
+simulationSettings:
+  defaultPose: Basic
+  timeStep: 0.025
+  useTimeStep: false
+  isRunning: false
+topic_jointStates: joint_states

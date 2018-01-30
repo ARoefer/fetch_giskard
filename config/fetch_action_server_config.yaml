@@ -1,0 +1,8 @@
+# position_controllers:
+#   head_tilt_joint: /head_tilt_position_controller/command
+#   head_pan_joint: /head_pan_position_controller/command
+# gripper_controllers:
+#   r_gripper_joint: /r_gripper_controller/command
+#   l_gripper_joint: /l_gripper_controller/command
+joint_state_command_topic: /simulator/commands
+#joint_state_command_topic: /velocity_controller/joint_velocity_controller/joint_velocity_commands
