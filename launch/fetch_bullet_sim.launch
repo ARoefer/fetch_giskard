@@ -4,10 +4,8 @@
   <param name="robot_description"
     textfile="$(find fetch_giskard)/robots/fetch.urdf" />
 
-  <node pkg="iai_naive_kinematics_sim" type="simulator"
-        name="simulator" output="screen">
-    <rosparam command="load"
-        file="$(find fetch_giskard)/test_data/fetch_sim_config.yaml" />
+  <node pkg="gebsyas" type="simulator_node.py" name="simulator" output="screen">
+    <rosparam command="load" file="$(find fetch_giskard)/test_data/fetch_sim_config.yaml" />
     <remap from="~joint_states" to="joint_states" />
   </node>
 

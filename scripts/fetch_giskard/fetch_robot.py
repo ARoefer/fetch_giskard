@@ -1,7 +1,7 @@
 import operator
-from giskard_affordances.dl_reasoning import SymbolicData, DLBodyPosture
-from giskardpy.robot import Robot, Joint, Gripper
-from giskard_affordances.utils import JointState
+from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
+from giskardpy.robot import Robot, Joint, Gripper, Camera
+from gebsyas.utils import JointState
 from collections import namedtuple
 import giskardpy.symengine_wrappers as spw
 
@@ -36,8 +36,12 @@ class Fetch(Robot):
 							   max_opening=0.1,
 							   link_name='gripper_link')
 
-		self.eef     = self.gripper.pose
-		self.camera  = self.frames['head_camera_link']
+		self.eef    = self.gripper.pose
+		self.camera = Camera(name='head_camera',
+							 pose=self.frames['head_camera_link'],
+							 hfov=54.0,
+							 near=0.35,
+							 far=3.0)
 
 	def set_joint_state(self, joint_state):
 		for joint_name, state in joint_state.items():
@@ -52,6 +56,14 @@ class Fetch(Robot):
 					   self.gripper.height,
 					   self.gripper.max_opening,
 					   self.gripper.link_name)
+
+	def do_camera_fk(self, joint_state):
+		js = {name: state.position for name, state in joint_state.items()}
+		return Camera(name=self.camera.name,
+					  pose=self.camera.pose.subs(js),
+					  hfov=self.camera.hfov,
+					  near=self.camera.near,
+					  far=self.camera.far)
 
 	def do_js_resolve(self, joint_state):
 		return {jname: JointState(joint_state[jname].position, joint_state[jname].velocity, joint_state[jname].effort) for jname in self.state.data}

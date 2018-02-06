@@ -38,7 +38,7 @@ class FetchEEFPositionControl(object):
         try:
             now = rospy.Time.now()
             #self.tfListener.waitForTransform("base_link", self.goal_frame, now, rospy.Duration(0.5))
-            (trans, rot) = self.tfListener.lookupTransform('base_link', self.goal_frame, rospy.Time(0))
+            (trans, rot) = self.tfListener.lookupTransform('odom', self.goal_frame, rospy.Time(0))
             self.controller.set_goal(trans)
             command = self.controller.get_next_command()
             cmdMsg = cmdDictToJointState(command)

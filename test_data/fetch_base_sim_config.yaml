@@ -1,6 +1,5 @@
 simulated_joints:
   - planar_x_joint
-  - planar_y_joint
   - base_turn_joint
   - head_pan_joint
   - head_tilt_joint
@@ -16,6 +15,8 @@ simulated_joints:
   - l_gripper_finger_joint
   - bellows_joint
 start_config:
+  planar_x_joint: 0
+  base_turn_joint: 0
   torso_lift_joint: 0.3
   head_pan_joint: 0.0
   head_tilt_joint: 0.0
@@ -30,7 +31,6 @@ start_config:
   l_gripper_finger_joint: 0.05
 controlled_joints:
   - planar_x_joint
-  - planar_y_joint
   - base_turn_joint
   - head_pan_joint
   - head_tilt_joint
