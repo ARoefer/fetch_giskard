@@ -77,6 +77,7 @@ bool VelocityController::stop(bool force) {
 bool VelocityController::reset() {
   for (auto it = controlledJoints.begin(); it != controlledJoints.end(); it++)
     stopJoint(it->second);
+  return true;
 }
 
 void VelocityController::update(const ros::Time& time, const ros::Duration& dt) {

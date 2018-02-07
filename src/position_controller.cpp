@@ -75,6 +75,7 @@ bool PositionController::stop(bool force) {
 bool PositionController::reset() {
   for (auto it = controlledJoints.begin(); it != controlledJoints.end(); it++)
     stopJoint(it->second);
+  return true;
 }
 
 void PositionController::update(const ros::Time& time, const ros::Duration& dt) {
