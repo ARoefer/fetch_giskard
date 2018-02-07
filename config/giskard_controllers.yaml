@@ -26,7 +26,13 @@ base_controller:
   # use laser to only slowly collide with things
   laser_safety_dist: 1.0
 
+gravity_compensation:
+  type: "robot_controllers/GravityCompensation"
+  autostart: true
+  
+
 robot_driver:
   default_controllers:
     - "velocity_controller/joint_velocity_controller"
     - "base_controller"
+    - "gravity_compensation"
