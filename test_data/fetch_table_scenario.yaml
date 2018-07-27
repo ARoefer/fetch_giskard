@@ -1,110 +1,10 @@
-topic_jointStates: joint_states
-topic_jointCommands: /velocity_controller/joint_velocity_controller/joint_velocity_commands
-service_setJointState: /simulator/set_joint_states
-simulationSettings:
-  timeStep: 0.025
-  useTimeStep: false
-  isRunning: false
-  defaultPose: Basic
 inputAssignments:
   goal_bla:
-    object: poi
-    target: base_link
     name: goal_bla
+    target: base_link
     type: frameQuery
+    object: poi
 sceneObjects:
-  coke:
-    name: coke
-    parent: base_link
-    transform:
-      position:
-        x: 0.7537055611610413
-        y: -0.2473929524421692
-        z: 0.8760733008384705
-      rotation:
-        x: 0
-        y: 0
-        z: 0
-        w: 1
-    visual:
-      header:
-        frame_id: ""
-      ns: ""
-      id: 0
-      type: 10
-      action: 0
-      pose:
-        position:
-          x: 0
-          y: 0
-          z: 0
-        orientation:
-          x: 0
-          y: 0
-          z: 0
-          w: 1
-      scale:
-        x: 1
-        y: 1
-        z: 1
-      color:
-        r: 0.8392157
-        g: 0.1254902
-        b: 0
-        a: 1
-      points:
-        []
-      colors:
-        []
-      text: ""
-      mesh_resource: package://4progress_object_models//dae_obj_files/coke.dae
-      mesh_use_embedded_materials: true
-  poi:
-    name: poi
-    parent: base_link
-    transform:
-      position:
-        x: 0.8955602645874023
-        y: -0.2637102007865906
-        z: 1.135469913482666
-      rotation:
-        x: -1.592695071157729e-08
-        y: 1.271190679039626e-07
-        z: 0.9753249467922314
-        w: 0.220774201764415
-    visual:
-      header:
-        frame_id: ""
-      ns: ""
-      id: 0
-      type: 2
-      action: 0
-      pose:
-        position:
-          x: 0
-          y: 0
-          z: 0
-        orientation:
-          x: 0
-          y: 0
-          z: 0
-          w: 1
-      scale:
-        x: 0.05
-        y: 0.05
-        z: 0.05
-      color:
-        r: 1
-        g: 1
-        b: 1
-        a: 1
-      points:
-        []
-      colors:
-        []
-      text: ""
-      mesh_resource: ""
-      mesh_use_embedded_materials: true
   pringles:
     name: pringles
     parent: base_link
@@ -151,6 +51,98 @@ sceneObjects:
       text: ""
       mesh_resource: ""
       mesh_use_embedded_materials: true
+  coke:
+    name: coke
+    parent: base_link
+    transform:
+      position:
+        x: 0.7536999583244324
+        y: -0.3024114668369293
+        z: 0.871674120426178
+      rotation:
+        x: 0
+        z: 0
+        y: 0
+        w: 1
+    visual:
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      color:
+        r: 0.8392157
+        g: 0.1254902
+        a: 1
+        b: 0
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: package://4progress_object_models//dae_obj_files/coke.dae
+      mesh_use_embedded_materials: true
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 10
+      action: 0
+      pose:
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+        position:
+          x: 0
+          y: 0
+          z: 0
+  poi:
+    visual:
+      header:
+        frame_id: ""
+      ns: ""
+      id: 0
+      type: 2
+      action: 0
+      pose:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        orientation:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+      scale:
+        x: 0.05
+        y: 0.05
+        z: 0.05
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      points:
+        []
+      colors:
+        []
+      text: ""
+      mesh_resource: ""
+      mesh_use_embedded_materials: true
+    name: poi
+    parent: base_link
+    transform:
+      position:
+        x: 0.8955602645874023
+        y: -0.2637102007865906
+        z: 1.141769528388977
+      rotation:
+        x: -1.592695069839316e-08
+        y: 1.271190675984046e-07
+        z: 0.9753249438963989
+        w: 0.2207742145574746
   sugar:
     name: sugar
     parent: base_link
@@ -160,10 +152,10 @@ sceneObjects:
         y: -0.112997755408287
         z: 0.8544877767562866
       rotation:
-        x: 0.7085195179706874
-        y: 0.1357040553509901
+        x: 0.7085195179706877
+        y: 0.1357040553509902
         z: 0.1302720307559717
-        w: 0.6801571142159696
+        w: 0.680157114215969
     visual:
       header:
         frame_id: ""
@@ -198,24 +190,17 @@ sceneObjects:
       mesh_resource: ""
       mesh_use_embedded_materials: true
   table:
-    name: table
-    parent: base_link
     transform:
       position:
         x: 0.8754167556762695
-        y: -0.114052452147007
         z: 0.7905427813529968
+        y: -0.114052452147007
       rotation:
-        x: -0.0004182545433745069
-        y: 0.005502376583491829
+        x: -0.0004182545433745554
+        y: 0.005502376583491823
         z: 0.01118864839320241
-        w: 0.9999221785030091
+        w: 0.9999221785030092
     visual:
-      color:
-        r: 0.8862745
-        g: 0.7294118
-        b: 0.4156863
-        a: 1
       points:
         []
       colors:
@@ -240,29 +225,44 @@ sceneObjects:
           z: 0
           w: 1
       scale:
-        z: 0.03
         x: 0.58
         y: 1.17
-urdfPath:
-  path: fetch_description/robots/fetch.urdf
-  package: true
-controllerPath:
-  package: true
-  path: fetch_giskard/test_controllers/pos_controller.gpp
+        z: 0.03
+      color:
+        b: 0.4156863
+        a: 1
+        r: 0.8862745
+        g: 0.7294118
+    name: table
+    parent: base_link
 name: Test Scenario
+controllerPath:
+  path: fetch_giskard/test_controllers/pos_controller.gpp
+  package: true
+urdfPath:
+  package: true
+  path: fetch_description/robots/fetch.urdf
 poses:
   Basic:
+    robotName: fetch
+    name: Basic
     positions:
-      elbow_flex_joint: -2.155466379029744
       forearm_roll_joint: -1.106404147046963
       gripper_joint: 0
       head_pan_joint: 0.2538912136166552
       head_tilt_joint: 1.22637068297174
       shoulder_lift_joint: 0.6234586818886207
+      elbow_flex_joint: -2.155466379029744
       shoulder_pan_joint: -1.198809265503651
       torso_lift_joint: 0.3860999999999983
       upperarm_roll_joint: -1.413329615908279
       wrist_flex_joint: -1.509688682874709
       wrist_roll_joint: 3.636479350249048e-16
-    name: Basic
-    robotName: fetch
+topic_jointStates: joint_states
+topic_jointCommands: /simulator/commands
+service_setJointState: /simulator/set_joint_states
+simulationSettings:
+  timeStep: 0.025
+  useTimeStep: false
+  isRunning: false
+  defaultPose: Basic
