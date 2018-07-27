@@ -1,7 +1,9 @@
 import operator
 from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
 from giskardpy.robot import Robot, Joint, Gripper, Camera
+from giskardpy.qp_problem_builder import HardConstraint
 from gebsyas.utils import JointState
+from giskardpy.symengine_wrappers import pos_of
 from collections import namedtuple
 import giskardpy.symengine_wrappers as spw
 
@@ -42,6 +44,11 @@ class Fetch(Robot):
 							 hfov=54.0,
 							 near=0.35,
 							 far=3.0)
+
+		self.hard_constraints['limit_eef_x_speed'] = HardConstraint(-0.2, 0.2, pos_of(self.gripper.pose)[0])
+		self.hard_constraints['limit_eef_y_speed'] = HardConstraint(-0.2, 0.2, pos_of(self.gripper.pose)[1])
+		self.hard_constraints['limit_eef_z_speed'] = HardConstraint(-0.2, 0.2, pos_of(self.gripper.pose)[2])
+
 
 	def set_joint_state(self, joint_state):
 		for joint_name, state in joint_state.items():
