@@ -1,4 +1,4 @@
-velocity_controller:
+fetch:
   joint_velocity_controller:
     type: "robot_controllers/VelocityController"
     joints:
@@ -33,6 +33,6 @@ gravity_compensation:
 
 robot_driver:
   default_controllers:
-    - "velocity_controller/joint_velocity_controller"
+    - "fetch/joint_velocity_controller"
     - "base_controller"
     - "gravity_compensation"
