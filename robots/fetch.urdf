@@ -1,5 +1,27 @@
 <robot name="fetch">
   <link name="base_link">
+    <!-- <inertial>
+      <origin rpy="0 0 0" xyz="-0.0036 0.0 0.0014" />
+      <mass value="70.1294" />
+      <inertia ixx="1.225" ixy="0.0099" ixz="0.0062" iyy="1.2853" iyz="-0.0034" izz="0.987" />
+    </inertial> -->
+    <!-- <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/base_link.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/base_link_collision.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <link name="base_collision_link">
     <inertial>
       <origin rpy="0 0 0" xyz="-0.0036 0.0 0.0014" />
       <mass value="70.1294" />
@@ -21,6 +43,12 @@
       </geometry>
     </collision>
   </link>
+  <joint name="base_collision_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_collision_link" />
+    <axis xyz="0 1 0" />
+  </joint>
   <link name="r_wheel_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0" />
@@ -425,7 +453,9 @@
     <parent link="gripper_link" />
     <child link="r_gripper_finger_link" />
     <axis xyz="0 1 0" />
-  <limit effort="60" lower="0.0" upper="0.05" velocity="0.05" /><dynamics damping="100.0" /></joint>
+    <limit effort="60" lower="0.0" upper="0.05" velocity="0.05" /><dynamics damping="100.0" />
+    <mimic joint="gripper_joint" multiplier="0.5"/>
+  </joint>
   <joint name="gripper_joint" type="prismatic">
       <parent link="gripper_link" />
       <child link="fake_gripper_link"/>
@@ -461,7 +491,9 @@
     <parent link="gripper_link" />
     <child link="l_gripper_finger_link" />
     <axis xyz="0 -1 0" />
-  <limit effort="60" lower="0.0" upper="0.05" velocity="0.05" /><dynamics damping="100.0" /></joint>
+    <limit effort="60" lower="0.0" upper="0.05" velocity="0.05" /><dynamics damping="100.0" />
+    <mimic joint="gripper_joint" multiplier="0.5"/> 
+  </joint>
   <link name="bellows_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.0191320000286228 -1.67219873481315E-16 -0.134861625443387" />
