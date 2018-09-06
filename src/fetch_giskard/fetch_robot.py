@@ -6,7 +6,7 @@ from giskardpy.input_system    import JointStatesInput
 from giskardpy.qp_problem_builder import HardConstraint, JointConstraint
 from giskardpy.symengine_wrappers import pos_of
 from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
-from gebsyas.utils import JointState, symbol_formatter
+from gebsyas.utils import JointState, symbol_formatter, deg2rad
 from symengine import Symbol
 
 
@@ -41,8 +41,8 @@ class Fetch(Robot):
 		s_ang  = self.joint_states_input.joint_map['localization_z_ang']
 
 		self.world_transform = spw.frame3_rpy(0, 0, s_ang + sj_ang, 
-												[self.joint_states_input.joint_map['localization_x'] + spw.cos(s_ang) * sj_lin, 
-												 self.joint_states_input.joint_map['localization_y'] + spw.sin(s_ang) * sj_lin, 
+												[self.joint_states_input.joint_map['localization_x'] + (spw.cos(s_ang + sj_ang)) * sj_lin, 
+												 self.joint_states_input.joint_map['localization_y'] + (spw.sin(s_ang + sj_ang)) * sj_lin, 
 												 self.joint_states_input.joint_map['localization_z']])# * \
 												#  .frame
 
@@ -53,7 +53,7 @@ class Fetch(Robot):
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
 		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.05)
 		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.001)
-		self.joint_constraints['base_angular_joint'] = JointConstraint(-0.2, 0.4, 0.001)
+		self.joint_constraints['base_angular_joint'] = JointConstraint(-3, 3, 0.001)
 
 		self.gripper = Gripper(name='gripper',
 							   pose=self.get_fk_expression('map', 'gripper_link'),
@@ -67,13 +67,13 @@ class Fetch(Robot):
 		self.eef    = self.gripper.pose
 		self.camera = Camera(name='head_camera',
 							 pose=self.get_fk_expression('map', 'head_camera_link'),
-							 hfov=54.0,
+							 hfov=54.0 * deg2rad,
 							 near=0.35,
-							 far=3.0)
+							 far=6.0)
 
 		# 'torso_lift_link', 'wrist_roll_link'
-		# Link names mapped to safety margin and AABB blow up
-		self.collision_avoidance_links = {'base_collision_link': (0.15, 0.4), 'elbow_flex_link': (0.08, 0.15), 'wrist_flex_link': (0.05, 0.15), 'gripper_link': (0.02, 0.1)}
+		# Link names mapped to safety margin, AABB blow up and number of avoidance constraints
+		self.collision_avoidance_links = {'base_collision_link': (0.15, 0.4, 2), 'elbow_flex_link': (0.08, 0.15, 2), 'wrist_flex_link': (0.05, 0.15, 2), 'gripper_link': (0.02, 0.1, 5), 'l_gripper_finger_link': (0.01, 0.05, 2), 'r_gripper_finger_link': (0.01, 0.05, 2)}
 
 		self.self_collision_avoidance_pairs = {('gripper_link', 'torso_lift_link', 0.1), ('gripper_link', 'head_pan_link', 0.1), ('elbow_flex_link', 'torso_lift_link', 0.1)}
 
@@ -89,7 +89,7 @@ class Fetch(Robot):
 		return super(Fetch, self).get_fk_expression(root_link, tip_link)
 
 	def do_gripper_fk(self, joint_state):
-		js = {self.joint_states_input.joint_map[name]: state.position for name, state in joint_state.items()}
+		js = {self.joint_states_input.joint_map[name]: state.position for name, state in joint_state.items() if name in self.joint_states_input.joint_map}
 		return Gripper(self.gripper.name,
 					   self.gripper.pose.subs(js),
 					   joint_state['gripper_joint'].position,
@@ -100,7 +100,7 @@ class Fetch(Robot):
 					   self.gripper.pivot_position.subs(js))
 
 	def do_camera_fk(self, joint_state):
-		js = {self.joint_states_input.joint_map[name]: state.position for name, state in joint_state.items()}
+		js = {self.joint_states_input.joint_map[name]: state.position for name, state in joint_state.items() if name in self.joint_states_input.joint_map}
 		return Camera(name=self.camera.name,
 					  pose=self.camera.pose.subs(js),
 					  hfov=self.camera.hfov,
