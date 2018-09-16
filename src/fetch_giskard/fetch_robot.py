@@ -62,7 +62,7 @@ class Fetch(Robot):
 
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
 		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.05)
-		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 0.5, 0.1)
+		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.1)
 		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.1)
 
 
@@ -88,8 +88,9 @@ class Fetch(Robot):
 				SoftConstraint(-0.5 * s_deltaT, 0.5 * s_deltaT, 50, sj_lin),
 			'dynamics_angular_base_accel': 
 				SoftConstraint(-0.1 * s_deltaT, 0.1 * s_deltaT, 50, sj_ang),
-			'dynamics_torso_accel': 
-				SoftConstraint(-0.2 * s_deltaT, 0.2 * s_deltaT, 50, self.joint_states_input.joint_map['torso_lift_joint'])}
+			#'dynamics_torso_accel': 
+				#SoftConstraint(-0.2 * s_deltaT, 0.2 * s_deltaT, 50, self.joint_states_input.joint_map['torso_lift_joint'])
+				}
 
 		# 'torso_lift_link', 'wrist_roll_link'
 		# Link names mapped to safety margin, AABB blow up and number of avoidance constraints
