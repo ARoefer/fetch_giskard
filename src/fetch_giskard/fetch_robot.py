@@ -2,7 +2,7 @@ import giskardpy.symengine_wrappers as spw
 from giskardpy.symengine_robot import Robot, Joint, Gripper, Camera
 from giskardpy.input_system    import JointStatesInput
 from giskardpy.qp_problem_builder import HardConstraint, JointConstraint, SoftConstraint
-from giskardpy.symengine_wrappers import pos_of
+from giskardpy.symengine_wrappers import pos_of, diag, norm
 from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
 from gebsyas.utils import JointState, symbol_formatter, deg2rad
 from symengine import Symbol
@@ -61,9 +61,9 @@ class Fetch(Robot):
 		self.state = SymbolicData({jn: JointState(self._joints[jn].symbol, 0, 0) for jn in self.get_joint_names()}, self.do_js_resolve, ['joint_state'])
 
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
-		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.05)
-		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.1)
-		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.1)
+		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.1)
+		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.2)
+		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.2)
 
 
 		self.gripper = Gripper(name='gripper',
@@ -83,11 +83,21 @@ class Fetch(Robot):
 							 near=0.35,
 							 far=6.0)
 
+
+		eef_p_vec   = diag(1,1,0,0) * pos_of(self.get_fk_expression('base_link', 'wrist_flex_link'))
+		#wrist_p_vec = diag(1,1,0,0) * pos_of(self.get_fk_expression('base_link', 'wrist_flex_link'))
+		elbow_p_vec = diag(1,1,0,0) * pos_of(self.get_fk_expression('base_link', 'elbow_flex_link'))
+
+		arm_com = 0.5 * (eef_p_vec + elbow_p_vec)
+		base_vel_sum = abs(sj_lin) + abs(sj_ang)
+
 		self.soft_dynamics_constraints = {
 			'dynamics_linear_base_accel' : 
 				SoftConstraint(-0.5 * s_deltaT, 0.5 * s_deltaT, 50, sj_lin),
-			'dynamics_angular_base_accel': 
-				SoftConstraint(-0.1 * s_deltaT, 0.1 * s_deltaT, 50, sj_ang),
+			#'dynamics_manuvering_safety' :
+			#	SoftConstraint(-norm(arm_com), -norm(arm_com) * base_vel_sum, 1, norm(arm_com))
+			#'dynamics_angular_base_accel': 
+			#	SoftConstraint(-0.1 * s_deltaT, 0.1 * s_deltaT, 50, sj_ang),
 			#'dynamics_torso_accel': 
 				#SoftConstraint(-0.2 * s_deltaT, 0.2 * s_deltaT, 50, self.joint_states_input.joint_map['torso_lift_joint'])
 				}
