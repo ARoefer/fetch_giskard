@@ -89,13 +89,13 @@ class Fetch(Robot):
 		elbow_p_vec = diag(1,1,0,0) * pos_of(self.get_fk_expression('base_link', 'elbow_flex_link'))
 
 		arm_com = 0.5 * (eef_p_vec + elbow_p_vec)
-		base_vel_sum = abs(sj_lin) + abs(sj_ang)
+		base_vel_sum = abs(s_clv_x) + abs(s_cav_z)
 
 		self.soft_dynamics_constraints = {
 			'dynamics_linear_base_accel' : 
 				SoftConstraint(-0.5 * s_deltaT, 0.5 * s_deltaT, 50, sj_lin),
-			#'dynamics_manuvering_safety' :
-			#	SoftConstraint(-norm(arm_com), -norm(arm_com) * base_vel_sum, 1, norm(arm_com))
+			# 'dynamics_manuvering_safety' :
+			# 	SoftConstraint(-norm(arm_com), -norm(arm_com) * base_vel_sum, 1, norm(arm_com))
 			#'dynamics_angular_base_accel': 
 			#	SoftConstraint(-0.1 * s_deltaT, 0.1 * s_deltaT, 50, sj_ang),
 			#'dynamics_torso_accel': 
@@ -104,9 +104,9 @@ class Fetch(Robot):
 
 		# 'torso_lift_link', 'wrist_roll_link'
 		# Link names mapped to safety margin, AABB blow up and number of avoidance constraints
-		self.collision_avoidance_links = {'base_collision_link': (0.15, 0.4, 4), 'elbow_flex_link': (0.08, 0.15, 2), 'wrist_flex_link': (0.05, 0.15, 2), 'gripper_link': (0.01, 0.1, 5), 'l_gripper_finger_link': (0.005, 0.05, 2), 'r_gripper_finger_link': (0.005, 0.05, 2)}
+		self.collision_avoidance_links = {'base_collision_link': (0.15, 0.4, 4), 'torso_lift_link': (0.1, 0.2, 3), 'head_pan_link': (0.1, 0.2, 3)}#, 'elbow_flex_link': (0.08, 0.15, 2), 'wrist_flex_link': (0.05, 0.15, 2), 'gripper_link': (0.01, 0.1, 5), 'l_gripper_finger_link': (0.005, 0.05, 2), 'r_gripper_finger_link': (0.005, 0.05, 2)}
 
-		self.self_collision_avoidance_pairs = {('gripper_link', 'torso_lift_link', 0.1), ('gripper_link', 'bellows_link', 0.1), ('gripper_link', 'base_collision_link', 0.1), ('gripper_link', 'box_link', 0.1), ('gripper_link', 'head_pan_link', 0.1), ('elbow_flex_link', 'torso_lift_link', 0.1)}
+		self.self_collision_avoidance_pairs = {} # {('gripper_link', 'torso_lift_link', 0.1), ('gripper_link', 'bellows_link', 0.1), ('gripper_link', 'base_collision_link', 0.1), ('gripper_link', 'box_link', 0.1), ('gripper_link', 'head_pan_link', 0.1), ('elbow_flex_link', 'torso_lift_link', 0.1)}
 
 
 	def get_fk_expression(self, root_link, tip_link):
