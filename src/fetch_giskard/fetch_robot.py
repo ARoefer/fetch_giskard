@@ -78,7 +78,7 @@ class Fetch(Robot):
 
 		self.eef    = self.gripper.pose
 		self.camera = Camera(name='head_camera',
-							 pose=self.get_fk_expression('map', 'head_camera_link'),
+							 pose=self.get_fk_expression('map', 'head_tilt_link'),
 							 hfov=54.0 * deg2rad,
 							 near=0.35,
 							 far=6.0)
