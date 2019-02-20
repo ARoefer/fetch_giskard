@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+<robot name="fetch">
+  <link name="base_link"/>
+  <link name="base_collision_link">
+    <inertial>
+      <origin xyz="-0.0036 0.0 0.0014" rpy="0.0 0.0 0.0"/>
+      <mass value="70.1294"/>
+      <inertia ixx="1.225" ixy="0.0099" ixz="0.0062" iyy="1.2853" iyz="-0.0034" izz="0.987"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/base_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/base_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_collision_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="base_collision_link"/>
+  </joint>
+  <link name="box_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_giskard/meshes/delivery_box.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_giskard/meshes/delivery_box.dae"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="box_joint" type="fixed">
+    <origin xyz="0.12 0.0 0.43" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="box_link"/>
+  </joint>
+  <link name="r_wheel_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="4.3542"/>
+      <inertia ixx="0.0045" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.0045"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/r_wheel_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/r_wheel_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="r_wheel_joint" type="continuous">
+    <origin xyz="0.0012914 -0.18738 0.055325" rpy="-6.123e-17 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="r_wheel_link"/>
+    <limit effort="8.85" velocity="17.4"/>
+  </joint>
+  <link name="l_wheel_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="4.3542"/>
+      <inertia ixx="0.0045" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.0045"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/l_wheel_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/l_wheel_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_wheel_joint" type="continuous">
+    <origin xyz="0.0012914 0.18738 0.055325" rpy="-6.123e-17 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="l_wheel_link"/>
+    <limit effort="8.85" velocity="17.4"/>
+  </joint>
+  <link name="torso_lift_link">
+    <inertial>
+      <origin xyz="-0.0013 -0.0009 0.2935" rpy="0.0 0.0 0.0"/>
+      <mass value="10.7796"/>
+      <inertia ixx="0.3354" ixy="0.0" ixz="-0.0162" iyy="0.3354" iyz="-0.0006" izz="0.0954"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/torso_lift_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/torso_lift_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="torso_lift_joint" type="prismatic">
+    <origin xyz="-0.086875 0.0 0.37743" rpy="-6.123e-17 0.0 0.0"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <parent link="base_link"/>
+    <child link="torso_lift_link"/>
+    <limit effort="450.0" lower="0.0" upper="0.38615" velocity="0.1"/>
+    <dynamics damping="100.0"/>
+  </joint>
+  <link name="head_pan_link">
+    <inertial>
+      <origin xyz="0.0321 0.0161 0.039" rpy="0.0 0.0 0.0"/>
+      <mass value="2.2556"/>
+      <inertia ixx="0.0129" ixy="0.0002" ixz="0.0007" iyy="0.0095" iyz="-0.0" izz="0.0184"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/head_pan_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/head_pan_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_pan_joint" type="revolute">
+    <origin xyz="0.053125 0.0 0.603001417714" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <parent link="torso_lift_link"/>
+    <child link="head_pan_link"/>
+    <limit effort="0.32" lower="-1.57" upper="1.57" velocity="1.57"/>
+  </joint>
+  <link name="head_tilt_link">
+    <inertial>
+      <origin xyz="0.0081 0.0025 0.0113" rpy="0.0 0.0 0.0"/>
+      <mass value="0.9087"/>
+      <inertia ixx="0.0061" ixy="-0.0" ixz="0.0002" iyy="0.0014" iyz="-0.0001" izz="0.0061"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/head_tilt_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/head_tilt_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_tilt_joint" type="revolute">
+    <origin xyz="0.14253 0.0 0.057999" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="head_pan_link"/>
+    <child link="head_tilt_link"/>
+    <limit effort="0.68" lower="-0.76" upper="1.45" velocity="1.57"/>
+  </joint>
+  <link name="shoulder_pan_link">
+    <inertial>
+      <origin xyz="0.0927 -0.0056 0.0564" rpy="0.0 0.0 0.0"/>
+      <mass value="2.5587"/>
+      <inertia ixx="0.0043" ixy="-0.0001" ixz="0.001" iyy="0.0087" iyz="-0.0001" izz="0.0087"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/shoulder_pan_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/shoulder_pan_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shoulder_pan_joint" type="revolute">
+    <origin xyz="0.119525 0.0 0.34858" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <parent link="torso_lift_link"/>
+    <child link="shoulder_pan_link"/>
+    <limit effort="33.82" lower="-1.6056" upper="1.6056" velocity="1.256"/>
+    <dynamics damping="1.0"/>
+  </joint>
+  <link name="shoulder_lift_link">
+    <inertial>
+      <origin xyz="0.1432 0.0072 -0.0001" rpy="0.0 0.0 0.0"/>
+      <mass value="2.6615"/>
+      <inertia ixx="0.0028" ixy="-0.0021" ixz="-0.0" iyy="0.0111" iyz="-0.0" izz="0.0112"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/shoulder_lift_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/shoulder_lift_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="shoulder_lift_joint" type="revolute">
+    <origin xyz="0.117 0.0 0.06" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="shoulder_pan_link"/>
+    <child link="shoulder_lift_link"/>
+    <limit effort="131.76" lower="-1.221" upper="1.518" velocity="1.454"/>
+    <dynamics damping="1.0"/>
+  </joint>
+  <link name="upperarm_roll_link">
+    <inertial>
+      <origin xyz="0.1165 0.0014 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="2.3311"/>
+      <inertia ixx="0.0019" ixy="-0.0001" ixz="0.0" iyy="0.0045" iyz="0.0" izz="0.0047"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/upperarm_roll_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/upperarm_roll_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="upperarm_roll_joint" type="continuous">
+    <origin xyz="0.219 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="shoulder_lift_link"/>
+    <child link="upperarm_roll_link"/>
+    <limit effort="76.94" velocity="1.571"/>
+    <dynamics damping="5.0"/>
+  </joint>
+  <link name="elbow_flex_link">
+    <inertial>
+      <origin xyz="0.1279 0.0073 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="2.1299"/>
+      <inertia ixx="0.0024" ixy="-0.0016" ixz="0.0" iyy="0.0082" iyz="-0.0" izz="0.0084"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/elbow_flex_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/elbow_flex_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="elbow_flex_joint" type="revolute">
+    <origin xyz="0.133 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="upperarm_roll_link"/>
+    <child link="elbow_flex_link"/>
+    <limit effort="66.18" lower="-2.251" upper="2.251" velocity="1.521"/>
+    <dynamics damping="1.0"/>
+  </joint>
+  <link name="forearm_roll_link">
+    <inertial>
+      <origin xyz="0.1097 -0.0266 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="1.6563"/>
+      <inertia ixx="0.0016" ixy="-0.0003" ixz="0.0" iyy="0.003" iyz="-0.0" izz="0.0035"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/forearm_roll_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/forearm_roll_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="forearm_roll_joint" type="continuous">
+    <origin xyz="0.197 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="elbow_flex_link"/>
+    <child link="forearm_roll_link"/>
+    <limit effort="29.35" velocity="1.571"/>
+    <dynamics damping="5.0"/>
+  </joint>
+  <link name="wrist_flex_link">
+    <inertial>
+      <origin xyz="0.0882 0.0009 -0.0001" rpy="0.0 0.0 0.0"/>
+      <mass value="1.725"/>
+      <inertia ixx="0.0018" ixy="-0.0001" ixz="-0.0" iyy="0.0042" iyz="0.0" izz="0.0042"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/wrist_flex_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/wrist_flex_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_flex_joint" type="revolute">
+    <origin xyz="0.1245 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="forearm_roll_link"/>
+    <child link="wrist_flex_link"/>
+    <limit effort="25.7" lower="-2.16" upper="2.16" velocity="2.268"/>
+    <dynamics damping="1.0"/>
+  </joint>
+  <link name="wrist_roll_link">
+    <inertial>
+      <origin xyz="0.0095 0.0004 -0.0002" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1354"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/wrist_roll_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/wrist_roll_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wrist_roll_joint" type="continuous">
+    <origin xyz="0.1385 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="wrist_flex_link"/>
+    <child link="wrist_roll_link"/>
+    <limit effort="7.36" velocity="2.268"/>
+    <dynamics damping="5.0"/>
+  </joint>
+  <link name="gripper_link">
+    <inertial>
+      <origin xyz="-0.09 -0.0001 -0.0017" rpy="0.0 0.0 0.0"/>
+      <mass value="1.5175"/>
+      <inertia ixx="0.0013" ixy="-0.0" ixz="0.0" iyy="0.0019" iyz="-0.0" izz="0.0024"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/gripper_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/gripper_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper_axis" type="fixed">
+    <origin xyz="0.16645 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="wrist_roll_link"/>
+    <child link="gripper_link"/>
+  </joint>
+  <link name="r_gripper_finger_link">
+    <inertial>
+      <origin xyz="-0.01 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.0798"/>
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.101425 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/r_gripper_finger_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.101425 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/r_gripper_finger_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="r_gripper_finger_joint" type="prismatic">
+    <origin xyz="0.0 0.015425 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="gripper_link"/>
+    <child link="r_gripper_finger_link"/>
+    <limit effort="60.0" lower="0.0" upper="0.05" velocity="0.05"/>
+    <dynamics damping="100.0"/>
+    <mimic joint="gripper_joint" multiplier="0.5"/>
+  </joint>
+  <joint name="gripper_joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 1.0"/>
+    <parent link="gripper_link"/>
+    <child link="fake_gripper_link"/>
+    <limit effort="60.0" lower="0.0" upper="0.1" velocity="0.1"/>
+    <dynamics damping="100.0"/>
+  </joint>
+  <link name="fake_gripper_link"/>
+  <link name="l_gripper_finger_link">
+    <inertial>
+      <origin xyz="-0.01 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.0798"/>
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 -0.101425 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/l_gripper_finger_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.356 0.361 0.376 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 -0.101425 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/l_gripper_finger_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_gripper_finger_joint" type="prismatic">
+    <origin xyz="0.0 -0.015425 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 -1.0 0.0"/>
+    <parent link="gripper_link"/>
+    <child link="l_gripper_finger_link"/>
+    <limit effort="60.0" lower="0.0" upper="0.05" velocity="0.05"/>
+    <dynamics damping="100.0"/>
+    <mimic joint="gripper_joint" multiplier="0.5"/>
+  </joint>
+  <link name="bellows_link">
+    <inertial>
+      <origin xyz="0.0191320000286 -1.67219873481e-16 -0.134861625443" rpy="0.0 0.0 0.0"/>
+      <mass value="0.169374038217"/>
+      <inertia ixx="0.00331159128762" ixy="-8.92309643215e-18" ixz="-5.38622201018e-08" iyy="0.00174447292787" iyz="-8.06964979976e-17" izz="0.00169417568121"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/bellows_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/bellows_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="bellows_joint" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="torso_lift_link"/>
+    <child link="bellows_link"/>
+    <limit effort="5.0" lower="0.0" upper="0.4" velocity="0.1"/>
+  </joint>
+  <link name="bellows_link2">
+    <inertial>
+      <origin xyz="0.0191320000286 -1.67219873481e-16 -0.134861625443" rpy="0.0 0.0 0.0"/>
+      <mass value="0.169374038217"/>
+      <inertia ixx="0.00331159128762" ixy="-8.92309643215e-18" ixz="-5.38622201018e-08" iyy="0.00174447292787" iyz="-8.06964979976e-17" izz="0.00169417568121"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/bellows_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/bellows_link_collision.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="bellows_joint2" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="torso_lift_link"/>
+    <child link="bellows_link2"/>
+  </joint>
+  <link name="estop_link">
+    <inertial>
+      <origin xyz="0.00243451273707 -0.0033060831524 0.0066513919665" rpy="0.0 0.0 0.0"/>
+      <mass value="0.00196130439135"/>
+      <inertia ixx="3.02810026604e-07" ixy="-1.58620231181e-08" ixz="3.16561396557e-08" iyy="2.93322917128e-07" iyz="-4.28833522751e-08" izz="2.28513272627e-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/estop_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/estop_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="estop_joint" type="fixed">
+    <origin xyz="-0.12465 0.23892 0.31127" rpy="1.5708 0.0 0.0"/>
+    <axis xyz="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="estop_link"/>
+  </joint>
+  <link name="laser_link">
+    <inertial>
+      <origin xyz="-0.0306228970176 0.000709168290828 0.0551974119471" rpy="0.0 0.0 0.0"/>
+      <mass value="0.00833634573996"/>
+      <inertia ixx="1.01866461241e-06" ixy="-5.88447626568e-08" ixz="7.83857244758e-08" iyy="5.10039589975e-07" iyz="-7.12664289617e-09" izz="1.28270671527e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/laser_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745 0.819607843137 0.933333333333 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/laser_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="0.235 0.0 0.2878" rpy="3.14159265359 0.0 0.0"/>
+    <axis xyz="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+  </joint>
+  <link name="torso_fixed_link">
+    <inertial>
+      <origin xyz="-0.0722 0.0057 0.2656" rpy="0.0 0.0 0.0"/>
+      <mass value="13.2775"/>
+      <inertia ixx="0.3861" ixy="0.0015" ixz="-0.0102" iyy="0.3388" iyz="0.0117" izz="0.1018"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/torso_fixed_link.dae"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.086 0.506 0.767 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://fetch_description/meshes/torso_fixed_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="torso_fixed_joint" type="fixed">
+    <origin xyz="-0.086875 0.0 0.377425" rpy="-6.12303176911e-17 0.0 0.0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="torso_fixed_link"/>
+  </joint>
+  <link name="head_camera_link"/>
+  <joint name="head_camera_joint" type="fixed">
+    <origin xyz="0.055 0.0 0.0225" rpy="0.0 0.0 0.0"/>
+    <parent link="head_tilt_link"/>
+    <child link="head_camera_link"/>
+  </joint>
+  <link name="head_camera_rgb_frame"/>
+  <joint name="head_camera_rgb_joint" type="fixed">
+    <origin xyz="0.0 0.02 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="head_camera_link"/>
+    <child link="head_camera_rgb_frame"/>
+  </joint>
+  <link name="head_camera_rgb_optical_frame"/>
+  <joint name="head_camera_rgb_optical_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.57079632679 0.0 -1.57079632679"/>
+    <parent link="head_camera_rgb_frame"/>
+    <child link="head_camera_rgb_optical_frame"/>
+  </joint>
+  <link name="head_camera_depth_frame"/>
+  <joint name="head_camera_depth_joint" type="fixed">
+    <origin xyz="0.0 0.045 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="head_camera_link"/>
+    <child link="head_camera_depth_frame"/>
+  </joint>
+  <link name="head_camera_depth_optical_frame"/>
+  <joint name="head_camera_depth_optical_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="-1.57079632679 0.0 -1.57079632679"/>
+    <parent link="head_camera_depth_frame"/>
+    <child link="head_camera_depth_optical_frame"/>
+  </joint>
+</robot>
