@@ -62,7 +62,7 @@ class Fetch(Robot):
 
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
 		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.1)
-		self.joint_constraints['base_linear_joint']  = JointConstraint(-0.5, 1, 0.2)
+		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.2)
 		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.2)
 
 
@@ -78,7 +78,7 @@ class Fetch(Robot):
 
 		self.eef    = self.gripper.pose
 		self.camera = Camera(name='head_camera',
-							 pose=self.get_fk_expression('map', 'head_camera_link'),
+							 pose=self.get_fk_expression('map', 'head_tilt_link'),
 							 hfov=54.0 * deg2rad,
 							 near=0.35,
 							 far=6.0)
