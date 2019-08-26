@@ -1,9 +1,11 @@
 import giskardpy.symengine_wrappers as spw
+
 from giskardpy.symengine_robot import Robot, Joint, Gripper, Camera
 from giskardpy.input_system    import JointStatesInput
 from giskardpy.qp_problem_builder import HardConstraint, JointConstraint, SoftConstraint
 from giskardpy.symengine_wrappers import pos_of
-from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
+
+from gebsyas.core.dl_types import DLBodyPosture
 from gebsyas.utils import JointState, symbol_formatter, deg2rad
 from symengine import Symbol
 
@@ -58,12 +60,12 @@ class Fetch(Robot):
 
 		gripper_joint = self._joints['gripper_joint']
 
-		self.state = SymbolicData({jn: JointState(self._joints[jn].symbol, 0, 0) for jn in self.get_joint_names()}, self.do_js_resolve, ['joint_state'])
+		self.state = {jn: JointState(self._joints[jn].symbol, 0, 0) for jn in self.get_joint_names()}
 
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
 		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.05)
-		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.1)
-		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.1)
+		self.joint_constraints['base_linear_joint']  = JointConstraint(-1, 1, 0.8)
+		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.8)
 
 
 		self.gripper = Gripper(name='gripper',
