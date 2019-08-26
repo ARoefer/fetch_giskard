@@ -58,15 +58,15 @@ int PositionController::init(ros::NodeHandle& nh, ControllerManager* manager) {
 }
 
 bool PositionController::start() {
-  cmdSubscriber = nh.subscribe("joint_velocity_commands", 10, &PositionController::commandCallback, this);
+  cmdSubscriber = nh.subscribe("commands", 10, &PositionController::commandCallback, this);
   ROS_INFO("Position controller started");
   return true;
 }
 
 bool PositionController::stop(bool force) {
   for (auto it = controlledJoints.begin(); it != controlledJoints.end(); it++) {
-    it->second.joint->setVelocity(0, 0);
     it->second.desiredPosition = it->second.joint->getPosition();
+    it->second.joint->setPosition(it->second.desiredPosition, 0, 0);
   }
   ROS_INFO("Position controller stopped");
   return true;
@@ -115,8 +115,8 @@ void PositionController::commandCallback(const sensor_msgs::JointState& command)
 }
 
 void PositionController::stopJoint(ControlledJoint& c) {
-  c.desiredPosition = 0;
-  c.joint->setVelocity(0, 0);
+  c.desiredPosition = c.joint->getPosition();
+  c.joint->setPosition(c.desiredPosition, 0, 0);
 }
 
 }  // namespace robot_controllers
