@@ -1,9 +1,16 @@
 import giskardpy.symengine_wrappers as spw
+
 from giskardpy.symengine_robot import Robot, Joint, Gripper, Camera
 from giskardpy.input_system    import JointStatesInput
 from giskardpy.qp_problem_builder import HardConstraint, JointConstraint, SoftConstraint
+<<<<<<< HEAD
 from giskardpy.symengine_wrappers import pos_of, diag, norm
 from gebsyas.dl_reasoning import SymbolicData, DLBodyPosture
+=======
+from giskardpy.symengine_wrappers import pos_of
+
+from gebsyas.core.dl_types import DLBodyPosture
+>>>>>>> b0c0a8d9d5d171044bac5ae4d8993d4116d7281e
 from gebsyas.utils import JointState, symbol_formatter, deg2rad
 from symengine import Symbol
 
@@ -32,11 +39,11 @@ class Fetch(Robot):
 												  spw.rotation3_rpy(0, 0, Symbol('base_angular_joint')))
 
 
-		self.set_joint_symbol_map(JointStatesInput.prefix_constructor(symbol_formatter, 
-									self.get_joint_names() + 
-									['localization_x', 'localization_y', 'localization_z', 
-									 'localization_z_ang', 'r_gripper_finger_joint', 'l_gripper_finger_joint', 'gripper_joint', 'linear_velocity_x', 'angular_velocity_z'], 
-									 '', 
+		self.set_joint_symbol_map(JointStatesInput.prefix_constructor(symbol_formatter,
+									self.get_joint_names() +
+									['localization_x', 'localization_y', 'localization_z',
+									 'localization_z_ang', 'r_gripper_finger_joint', 'l_gripper_finger_joint', 'gripper_joint', 'linear_velocity_x', 'angular_velocity_z'],
+									 '',
 									 'position'))
 
 
@@ -50,17 +57,18 @@ class Fetch(Robot):
 		l_accel_limit = 0.5
 		a_accel_limit = 0.2
 
-		self.world_transform = spw.frame3_rpy(0, 0, s_ang + sj_ang, 
-												[self.joint_states_input.joint_map['localization_x'] + (spw.cos(s_ang + sj_ang)) * sj_lin, 
-												 self.joint_states_input.joint_map['localization_y'] + (spw.sin(s_ang + sj_ang)) * sj_lin, 
+		self.world_transform = spw.frame3_rpy(0, 0, s_ang + sj_ang,
+												[self.joint_states_input.joint_map['localization_x'] + (spw.cos(s_ang + sj_ang)) * sj_lin,
+												 self.joint_states_input.joint_map['localization_y'] + (spw.sin(s_ang + sj_ang)) * sj_lin,
 												 self.joint_states_input.joint_map['localization_z']])# * \
 												#  .frame
 
 		gripper_joint = self._joints['gripper_joint']
 
-		self.state = SymbolicData({jn: JointState(self._joints[jn].symbol, 0, 0) for jn in self.get_joint_names()}, self.do_js_resolve, ['joint_state'])
+		self.state = {jn: JointState(self._joints[jn].symbol, 0, 0) for jn in self.get_joint_names()}
 
 		_torso_constraint = self.joint_constraints['torso_lift_joint']
+
 		self.joint_constraints['torso_lift_joint'] = JointConstraint(_torso_constraint.lower, _torso_constraint.upper, 0.1)
 		self.joint_constraints['base_linear_joint']  = JointConstraint(0, 1, 0.2)
 		self.joint_constraints['base_angular_joint'] = JointConstraint(-1.6, 1.6, 0.2)
@@ -92,14 +100,13 @@ class Fetch(Robot):
 		base_vel_sum = abs(sj_lin) + abs(sj_ang)
 
 		self.soft_dynamics_constraints = {
-			'dynamics_linear_base_accel' : 
+			'dynamics_linear_base_accel' :
 				SoftConstraint(-0.5 * s_deltaT, 0.5 * s_deltaT, 50, sj_lin),
 			#'dynamics_manuvering_safety' :
 			#	SoftConstraint(-norm(arm_com), -norm(arm_com) * base_vel_sum, 1, norm(arm_com))
 			#'dynamics_angular_base_accel': 
 			#	SoftConstraint(-0.1 * s_deltaT, 0.1 * s_deltaT, 50, sj_ang),
 			#'dynamics_torso_accel': 
-				#SoftConstraint(-0.2 * s_deltaT, 0.2 * s_deltaT, 50, self.joint_states_input.joint_map['torso_lift_joint'])
 				}
 
 		# 'torso_lift_link', 'wrist_roll_link'

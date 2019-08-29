@@ -60,7 +60,7 @@ int VelocityController::init(ros::NodeHandle& nh, ControllerManager* manager) {
 }
 
 bool VelocityController::start() {
-  cmdSubscriber = nh.subscribe("joint_velocity_commands", 10, &VelocityController::commandCallback, this);
+  cmdSubscriber = nh.subscribe("commands", 10, &VelocityController::commandCallback, this);
   ROS_INFO("Velocity controller started");
   return true;
 }
@@ -82,7 +82,7 @@ bool VelocityController::reset() {
 
 void VelocityController::update(const ros::Time& time, const ros::Duration& dt) {
   for (auto it = controlledJoints.begin(); it != controlledJoints.end(); it++) {
-    if ((time - it->second.lastCommandStamp).toSec() <= watchdogPeriod) {
+    if ((time - it->second.lastCommandStamp).toSec() <= watchdogPeriod) { // || it->second.lastCommandStamp == ros::Time(0)) {
 
       it->second.joint->setVelocity(it->second.desiredVelocity, 0);
     } else if (it->second.lastCommandStamp != ros::Time(0)) {
