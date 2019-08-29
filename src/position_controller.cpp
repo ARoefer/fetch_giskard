@@ -97,7 +97,7 @@ void PositionController::commandCallback(const sensor_msgs::JointState& command)
     return;
   }
 
-  if (command.effort.size() == 0 || command.effort.size() != command.name.size()) {
+  if (command.effort.size() != 0 && command.effort.size() != command.name.size()) {
      ROS_ERROR_NAMED("JointPositionController", "Malformed command message. Effort list must either be empty or have a number of entries matching the length of the name list.");
      return;
   }
