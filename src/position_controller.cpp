@@ -42,7 +42,7 @@ int PositionController::init(ros::NodeHandle& nh, ControllerManager* manager) {
     }
 
     // Effort is constant for now
-    controlledJoints[jname] = {joint, ros::Time(0), joint->getPosition()};
+    controlledJoints[jname] = {joint, ros::Time(0), 0.0};
   }
 
   this->nh = nh;
@@ -59,6 +59,10 @@ int PositionController::init(ros::NodeHandle& nh, ControllerManager* manager) {
 
 bool PositionController::start() {
   cmdSubscriber = nh.subscribe("commands", 10, &PositionController::commandCallback, this);
+  for (auto p: controlledJoints) {
+    p.second.desiredPosition = c.second.joint->getPosition();
+  }
+
   ROS_INFO("Position controller started");
   return true;
 }
