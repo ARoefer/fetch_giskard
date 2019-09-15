@@ -1,0 +1,4 @@
+<launch>
+    <rosparam file="$(find fetch_giskard)/config/head_torso_position_controllers.yaml" command="load"/>
+    <node name="robot_driver" pkg="fetch_drivers" type="robot_driver" output="screen"/>
+</launch>
