@@ -51,3 +51,12 @@ bellows_controller:
   controlled_joint: "bellows_joint"
   mimic_scale: 0.5
   autostart: true
+
+robot_driver:
+  default_controllers:
+    - "joint_position_controller"
+    - "arm_controller/follow_joint_trajectory"
+    - "arm_controller/gravity_compensation"
+    - "base_controller"
+    - "gripper_controller/gripper_action"
+    - "bellows_controller"
