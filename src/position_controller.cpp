@@ -42,7 +42,7 @@ int PositionController::init(ros::NodeHandle& nh, ControllerManager* manager) {
     }
 
     // Effort is constant for now
-    controlledJoints[jname] = {joint, ros::Time(0), 0.0};
+    controlledJoints[jname] = {joint, ros::Time(0), joint->getPosition()};
   }
 
   this->nh = nh;
