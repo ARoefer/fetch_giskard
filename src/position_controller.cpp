@@ -60,7 +60,7 @@ int PositionController::init(ros::NodeHandle& nh, ControllerManager* manager) {
 bool PositionController::start() {
   cmdSubscriber = nh.subscribe("commands", 10, &PositionController::commandCallback, this);
   for (auto p: controlledJoints) {
-    p.second.desiredPosition = c.second.joint->getPosition();
+    p.second.desiredPosition = p.second.joint->getPosition();
   }
 
   ROS_INFO("Position controller started");
