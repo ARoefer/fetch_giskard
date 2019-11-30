@@ -11,4 +11,4 @@ class FetchDriver(SimpleBaseDriver):
 
     @classmethod
     def factory(cls, config_dict):
-        return cls(config_dict['max_lin_vel'], config_dict['max_ang_vel'])
+        return super(FetchDriver, cls).factory(config_dict)
